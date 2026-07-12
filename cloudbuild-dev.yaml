@@ -4,14 +4,14 @@ steps:
   args:
   - build
   - -t
-  - us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v1.0
+  - us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v2.0
   - .
 
 - name: gcr.io/cloud-builders/docker
   id: Push development image
   args:
   - push
-  - us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v1.0
+  - us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v2.0
 
 - name: gcr.io/cloud-builders/kubectl
   id: Deploy development
@@ -24,7 +24,7 @@ steps:
   - CLOUDSDK_CONTAINER_CLUSTER=hello-cluster
 
 images:
-- us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v1.0
+- us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v2.0
 
 options:
   logging: CLOUD_LOGGING_ONLY

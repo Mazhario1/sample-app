@@ -1,14 +1,6 @@
 steps:
-- name: gcr.io/cloud-builders/go
-  id: Compile application
-  args:
-  - build
-  - -o
-  - main
-  - main.go
-
 - name: gcr.io/cloud-builders/docker
-  id: Build Docker image
+  id: Build development image
   args:
   - build
   - -t
@@ -16,22 +8,10 @@ steps:
   - .
 
 - name: gcr.io/cloud-builders/docker
-  id: Push Docker image
+  id: Push development image
   args:
   - push
   - us-east1-docker.pkg.dev/qwiklabs-gcp-04-cf856ac77b68/my-repository/hello-cloudbuild-dev:v1.0
-
-- name: gcr.io/cloud-builders/gcloud
-  id: Get GKE credentials
-  args:
-  - container
-  - clusters
-  - get-credentials
-  - hello-cluster
-  - --zone
-  - us-east1-b
-  - --project
-  - qwiklabs-gcp-04-cf856ac77b68
 
 - name: gcr.io/cloud-builders/kubectl
   id: Deploy development
@@ -48,3 +28,5 @@ images:
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
+timeout: 1200s
